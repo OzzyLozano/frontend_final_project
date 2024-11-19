@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+
+{% block title %}Proyecto U4{% endblock %}
+
+{% block nav_items %}
+  <a href="{{ url_for('index') }}" class="nav-link">Inicio</a>
+  <a href="{{ url_for('registrar_evento') }}" class="nav-link">Registrar Eventos</a>
+  <a href="{{ url_for('ver_eventos') }}" class="selected-nav-link" aria-current="page">Ver Eventos</a>
+{% endblock %}
+
+{% block mobile_nav_items %}
+<a href="{{ url_for('index') }}" class="mobile-nav-link">Inicio</a>
+<a href="{{ url_for('registrar_evento') }}" class="mobile-nav-link">Registrar Eventos</a>
+<a href="{{ url_for('ver_eventos') }}" class="mobile-selected-nav-link" aria-current="page">Ver Eventos</a>
+{% endblock %}
+
+{% block page %}Eventos{% endblock %}

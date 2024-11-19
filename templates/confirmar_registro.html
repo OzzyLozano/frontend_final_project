@@ -1,0 +1,44 @@
+{% extends 'registrar_eventos.html' %}
+
+
+{% block page %}Confirmacion de Registro{% endblock %}
+
+{% block body %}
+  <form class="flex flex-wrap justify-evenly my-12 gap-8">
+    <div class="inline-block w-10/12 sm:w-96 md:w-5/12 m-2 shadow pt-4 pb-12 px-8 rounded-2xl">
+      <h2 class="text-center md:text-start text-2xl">Evento</h2>
+    </div>
+    <div class="inline-block w-10/12 sm:w-96 md:w-5/12 m-2 shadow pt-4 pb-12 px-8 rounded-2xl">
+      <h2 class="text-center md:text-start text-2xl">Participantes</h2>
+    </div>
+    <div class="inline-block w-10/12 sm:w-96 md:w-5/12 m-2 shadow pt-4 pb-12 px-8 rounded-2xl">
+      <h2 class="text-center md:text-start text-2xl">Invitaciones</h2>
+    </div>
+    <div class="inline-block w-10/12 sm:w-96 md:w-5/12 m-2 shadow pt-4 pb-12 px-8 rounded-2xl">
+      <h2 class="text-center md:text-start text-2xl">Logística</h2>
+    </div>
+    
+    <button type="submit" class="pagination-btn">submit</button>
+  </form>
+
+  {% block buttons %}
+    <div class="flex flex-wrap gap-4 mt-8 justify-evenly">
+      <a href="{{ url_for('registrar_evento') }}" class="pagination-btn">
+        Evento
+      </a>
+      <a href="{{ url_for('registrar_participante') }}" class="pagination-btn">
+        Participantes
+      </a>
+      <a href="{{ url_for('registrar_invitaciones') }}" class="pagination-btn">
+        Invitaciones
+      </a>
+      <a href="{{ url_for('registrar_logistica') }}" class="pagination-btn">
+        Logística
+      </a>
+      <a class="selected-pagination-btn">
+        Confirmación
+      </a>
+    </div>
+  {% endblock %}
+
+{% endblock %}
