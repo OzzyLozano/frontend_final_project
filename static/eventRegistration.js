@@ -12,14 +12,14 @@ const eventForm = document.getElementById('event-form')
 const participantsForm = document.getElementById('participants-form')
 const invitationsForm = document.getElementById('invitations-form')
 const logisticForm = document.getElementById('logistic-form')
-const confirmationForm = document.getElementById('confirmation-form')
+const confirmationBtn = document.getElementById('confirmation-btn')
 
 goToEvent.addEventListener('click', () => {
   eventForm.classList.remove('hide')
   participantsForm.classList.add('hide')
   invitationsForm.classList.add('hide')
   logisticForm.classList.add('hide')
-  confirmationForm.classList.add('hide')
+  confirmationBtn.classList.add('hide')
   goToEvent.classList.add('hide')
   goToParticipants.classList.remove('hide')
   goToInvitations.classList.add('hide')
@@ -126,6 +126,13 @@ let eventData = {
 // links functionality
 goToParticipants.addEventListener('click', e => {
   e.preventDefault()
+  // code for adding title availability
+  // if (eventTitle.value) {
+  //   const url = `disponibilidad?titulo=${eventTitle.value}`
+  //   window.location.href = url
+  // } else {
+  //   alert('Ingrese un titulo')
+  // }
   eventData = {
     title: eventTitle.value,
     type: eventType.value,
@@ -139,21 +146,13 @@ goToParticipants.addEventListener('click', e => {
     participantsForm.classList.remove('hide')
     invitationsForm.classList.add('hide')
     logisticForm.classList.add('hide')
-    confirmationForm.classList.add('hide')
+    confirmationBtn.classList.add('hide')
     goToEvent.classList.remove('hide')
     goToParticipants.classList.add('hide')
     goToInvitations.classList.remove('hide')
     goToLogistic.classList.add('hide')
     goToConfirmation.classList.add('hide')
   }
-  // code for adding title availability
-  // if (eventTitle.value) {
-  //   const url = `disponibilidad?titulo=${eventTitle.value}`
-  //   this.href = url
-  //   window.location.href = url
-  // } else {
-  //   alert('Ingrese un titulo')
-  // }
 })
 
 // participant variables
@@ -257,7 +256,7 @@ goToInvitations.addEventListener('click', e => {
     participantsForm.classList.add('hide')
     invitationsForm.classList.remove('hide')
     logisticForm.classList.add('hide')
-    confirmationForm.classList.add('hide')
+    confirmationBtn.classList.add('hide')
     goToEvent.classList.add('hide')
     goToParticipants.classList.remove('hide')
     goToInvitations.classList.add('hide')
@@ -333,7 +332,7 @@ goToLogistic.addEventListener('click', e => {
     participantsForm.classList.add('hide')
     invitationsForm.classList.add('hide')
     logisticForm.classList.remove('hide')
-    confirmationForm.classList.add('hide')
+    confirmationBtn.classList.add('hide')
     goToEvent.classList.add('hide')
     goToParticipants.classList.add('hide')
     goToInvitations.classList.remove('hide')
@@ -394,107 +393,20 @@ goToConfirmation.addEventListener('click', e => {
   logisticData = {
     type: logisticType.value,
     provider: logisticProvider.value,
-    comments: logisticComments
+    comments: logisticComments.value
   }
 
   if (invitations) {
-    eventForm.classList.add('hide')
-    participantsForm.classList.add('hide')
-    invitationsForm.classList.add('hide')
-    logisticForm.classList.add('hide')
-    confirmationForm.classList.remove('hide')
+    eventForm.classList.remove('hide')
+    participantsForm.classList.remove('hide')
+    invitationsForm.classList.remove('hide')
+    logisticForm.classList.remove('hide')
+    confirmationBtn.classList.remove('hide')
     goToEvent.classList.add('hide')
     goToParticipants.classList.add('hide')
     goToInvitations.classList.add('hide')
     goToLogistic.classList.remove('hide')
     goToConfirmation.classList.add('hide')
   }
-  const eventDetails = `
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Tipo: </p>
-      <p id="confirm-event-type" class="text-start text-lg my-2">${eventData.type}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Título: </p>
-      <p id="confirm-event-title" class="text-start text-lg my-2">${eventData.title}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Descripción: </p>
-      <p id="confirm-event-description" class="text-start text-lg my-2">${eventData.description}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Ubicación: </p>
-      <p id="confirm-event-location" class="text-start text-lg my-2">${eventData.location}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Fecha: </p>
-      <p id="confirm-event-date" class="text-start text-lg my-2">${eventData.date}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Hora: </p>
-      <p id="confirm-event-hour" class="text-start text-lg my-2">${eventData.hour}</p>
-    </div>
-  `
-  const eventDetailsDiv = document.getElementById('event-details')
-  eventDetailsDiv.innerHTML = ''
-  eventDetailsDiv.insertAdjacentHTML('beforeend', eventDetails)
-  const participantDetails = `
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Nombre: </p>
-      <p id="confirm-event-type" class="text-start text-lg my-2">${participantData.nameParticipant}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Apellido: </p>
-      <p id="confirm-event-title" class="text-start text-lg my-2">${participantData.lastname}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Correo: </p>
-      <p id="confirm-event-description" class="text-start text-lg my-2">${participantData.emailParticipant}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Número: </p>
-      <p id="confirm-event-location" class="text-start text-lg my-2">${participantData.phoneParticipant}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Rol: </p>
-      <p id="confirm-event-date" class="text-start text-lg my-2">${participantData.role}</p>
-    </div>
-  `
-  const participantDetailsDiv = document.getElementById('participant-details')
-  participantDetailsDiv.innerHTML = ''
-  participantDetailsDiv.insertAdjacentHTML('beforeend', participantDetails)
-  const invitationDetails = `
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Nombre: </p>
-      <p id="confirm-event-type" class="text-start text-lg my-2">${invitationData.nameParticipant}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Correo: </p>
-      <p id="confirm-event-title" class="text-start text-lg my-2">${invitationData.emailInvitation}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Tipo: </p>
-      <p id="confirm-event-description" class="text-start text-lg my-2">${invitationData.typeInvitation}</p>
-    </div>
-  `
-  const invitationDetailsDiv = document.getElementById('invitation-details')
-  invitationDetailsDiv.innerHTML = ''
-  invitationDetailsDiv.insertAdjacentHTML('beforeend', invitationDetails)
-  const logistic = `
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Tipo: </p>
-      <p id="confirm-event-type" class="text-start text-lg my-2">${logisticData.type}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Proveedor: </p>
-      <p id="confirm-event-title" class="text-start text-lg my-2">${logisticData.provider}</p>
-    </div>
-    <div class="flex items-center">
-      <p class="text-start text-lg font-bold my-2 mr-2">Comentarios: </p>
-      <p id="confirm-event-description" class="text-start text-lg my-2">${logisticData.comments}</p>
-    </div>
-  `
-  const logisticDetailsDiv = document.getElementById('logistic-details')
-  logisticDetailsDiv.innerHTML = ''
-  logisticDetailsDiv.insertAdjacentHTML('beforeend', logistic)
+  console.log(eventData, participantData, invitationData, logisticData)
 })

@@ -9,7 +9,7 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS
   events(
     eventId INTEGER PRIMARY KEY AUTOINCREMENT,
-    title VARCHAR(40) NOT NULL,
+    title VARCHAR(40) NOT NULL UNIQUE,
     description VARCHAR(160) NOT NULL NOT NULL,
     dateTime TIMESTAMP NOT NULL,
     location VARCHAR(40) NOT NULL,
@@ -45,7 +45,6 @@ CREATE TABLE IF NOT EXISTS
   logistic(
     logisticId INTEGER PRIMARY KEY AUTOINCREMENT,
     type VARCHAR(40) NOT NULL,
-    quantity INTEGER NOT NULL,
     distribuitor VARCHAR(40) NOT NULL,
     comments VARCHAR(160) NOT NULL,
     eventId INTEGER,
