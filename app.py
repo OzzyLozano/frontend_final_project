@@ -1,4 +1,4 @@
-from flask import Flask, flash, redirect, render_template, url_for, request
+from flask import Flask, flash, jsonify, redirect, render_template, url_for, request
 import sqlite3
 
 app = Flask(__name__)
@@ -8,9 +8,17 @@ database_path = './database/database.db'
 def index():
   return render_template('index.html')
 
-@app.route('/verEventos')
+@app.route('/eventos')
 def ver_eventos():
-  return render_template('ver_eventos.html')
+  connection = sqlite3.connect(database_path)
+  cursor = connection.cursor()
+  events = cursor.execute(f'SELECT eventId, title, description, dateTime, location, type FROM events;').fetchall()
+  event_list = [
+    {'id': event[0], 'title': event[1], 'description': event[2], 'dateTime': event[3], 'location': event[4], 'type': event[5]}
+    for event in events
+  ]
+  connection.close()
+  return render_template('ver_eventos.html', events=event_list)
 
 @app.route('/registro/evento')
 def registrar_evento():

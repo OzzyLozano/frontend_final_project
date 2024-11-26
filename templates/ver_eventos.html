@@ -15,3 +15,28 @@
 {% endblock %}
 
 {% block page %}Eventos{% endblock %}
+
+{% block body %}
+<div class="w-full">
+  {% if events %}
+    <table class="w-auto mx-auto my-4">
+      <tbody>
+        <tr>
+          <th class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Id Evento</th>
+          <th class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Título</th>
+          <th class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Tipo</th>
+          <th class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Más Información</th>
+        </tr>
+      {% for event in events %}
+        <tr>
+          <td class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">{{ event['id'] }}</td>
+          <td class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">{{ event['title'] }}</td>
+          <td class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">{{ event['type'] }}</td>
+          <td class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Ver más...</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+</div>
+{% endblock %}
