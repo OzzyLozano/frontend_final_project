@@ -19,20 +19,22 @@
 {% block body %}
 <div class="w-full">
   {% if events %}
-    <table class="w-auto mx-auto my-4">
+    <table class="w-10/12 mx-auto my-4">
       <tbody>
         <tr>
-          <th class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Id Evento</th>
-          <th class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Título</th>
-          <th class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Tipo</th>
-          <th class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Más Información</th>
+          <th class="w-auto px-2 py-1 border-teal-500 border items-center text-start">Id</th>
+          <th class="w-auto px-2 py-1 border-teal-500 border items-center text-start">Título</th>
+          <th class="w-auto px-2 py-1 border-teal-500 border items-center text-start">Tipo</th>
+          <th class="w-auto px-2 py-1 border-teal-500 border items-center text-start">Más Información</th>
         </tr>
       {% for event in events %}
         <tr>
-          <td class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">{{ event['id'] }}</td>
-          <td class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">{{ event['title'] }}</td>
-          <td class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">{{ event['type'] }}</td>
-          <td class="w-1/4 px-4 py-2 border-teal-500 border items-center text-start">Ver más...</td>
+          <td class="w-auto px-2 py-1 border-teal-500 border items-center text-start">{{ event['id'] }}</td>
+          <td class="w-auto px-2 py-1 border-teal-500 border items-center text-start">{{ event['title'] }}</td>
+          <td class="w-auto px-2 py-1 border-teal-500 border items-center text-start">{{ event['type'] }}</td>
+          <td class="w-auto px-2 py-1 border-teal-500 border items-center text-start">
+            <a href="{{ url_for('evento', id=event['id']) }}">Ver más...</a>
+          </td>
         </tr>
       {% endfor %}
       </tbody>

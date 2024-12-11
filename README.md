@@ -6,5 +6,8 @@
   . .venv/Scripts/activate
   deactivate
 
-# correr app:
+# ejecutar app:
   python app.py
+
+# ejecutar cypress:
+  npx cypress open

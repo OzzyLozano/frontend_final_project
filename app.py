@@ -20,25 +20,39 @@ def ver_eventos():
   connection.close()
   return render_template('ver_eventos.html', events=event_list)
 
+@app.route('/evento/<id>')
+def evento(id):
+  connection = sqlite3.connect(database_path)
+  cursor = connection.cursor()
+  event_id = cursor.execute(f'SELECT eventId FROM events where eventId=?', (id,)).fetchone()
+  if event_id:
+    event_id = event_id[0]
+    event = cursor.execute(f'SELECT eventId, title, description, dateTime, location, type FROM events where eventId=?', (event_id,)).fetchone()
+    participants = cursor.execute(f'SELECT participandId, name, lastname, email, role, phone, eventId FROM participants where eventId=?', (event_id,)).fetchall()
+    invitations = cursor.execute(f'SELECT invitationId, name, email, type, eventId FROM invitations where eventId=?', (event_id,)).fetchall()
+    logistics = cursor.execute(f'SELECT logisticId, type, distribuitor, comments, eventId FROM logistic where eventId=?', (event_id,)).fetchall()
+    event_list = [
+      {'id': event[0], 'title': event[1], 'description': event[2], 'dateTime': event[3], 'location': event[4], 'type': event[5]}
+    ]
+    participant_list = [
+      {'id': participant[0], 'name': participant[1], 'lastname': participant[2], 'email': participant[3], 'role': participant[4], 'phone': participant[5]}
+      for participant in participants
+    ]
+    invitation_list = [
+      {'id': invitation[0], 'name': invitation[1], 'email': invitation[2], 'type': invitation[3]}
+      for invitation in invitations
+    ]
+    logistic_list = [
+      {'id': logistic[0], 'type': logistic[1], 'distribuitor': logistic[2], 'comments': logistic[3]}
+      for logistic in logistics
+    ]
+    return render_template('evento.html', events=event_list, participants=participant_list, invitations=invitation_list, logistics=logistic_list)
+  else:
+    return f'Error 404 :c'
+
 @app.route('/registro/evento')
 def registrar_evento():
   return render_template('registrar_eventos.html')
-
-@app.route('/registro/participante')
-def registrar_participante():
-  return render_template('registrar_participante.html')
-
-@app.route('/registro/invitaciones')
-def registrar_invitaciones():
-  return render_template('registrar_invitaciones.html')
-
-@app.route('/registro/logistica')
-def registrar_logistica():
-  return render_template('registrar_logistica.html')
-
-@app.route('/registro/confirmar')
-def confirmar_registro():
-  return render_template('confirmar_registro.html')
 
 # @app.route('/registro/disponibilidad')
 # def disponibilidad():

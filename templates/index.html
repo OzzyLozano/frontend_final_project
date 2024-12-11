@@ -95,7 +95,7 @@
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                {% block nav_items %}
               <a href="{{ url_for('index') }}" class="selected-nav-link" aria-current="page">Inicio</a>
-              <a href="{{ url_for('registrar_evento') }}" class="nav-link">Registrar Eventos</a>
+              <a id="registrar" href="{{ url_for('registrar_evento') }}" class="nav-link">Registrar Eventos</a>
               <a href="{{ url_for('ver_eventos') }}" class="nav-link">Ver Eventos</a>
               {% endblock %}
             </div>
